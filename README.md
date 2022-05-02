@@ -12,6 +12,6 @@ see nypl_token_example.py
     
 register for token here: http://api.repo.nypl.org/
 
-allows for a collection uuid as input, hits the nypl API and returns designated images sizes as jpegs.
+allows for a collection uuid as input, hits the nypl API and returns designated image sizes as jpegs.
 
 see notebook for detailed comments.
