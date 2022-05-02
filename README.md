@@ -1,6 +1,8 @@
 # nypl_api_nft
 Project for pulling digital collections from the nypl digital archives and processing them to generate nfts.
 
+**It appears that only collections in the public domain will return image links for downloading.**
+
 you will need a .py file called nypl_token formatted like so:
 
 class Token:
