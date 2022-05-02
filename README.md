@@ -7,6 +7,8 @@ you will need a .py file called nypl_token formatted like so:
 
 class Token:
     nypl_tok = 'api token here'
+
+see nypl_token_example.py
     
 register for token here: http://api.repo.nypl.org/
 
