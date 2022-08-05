@@ -1,2 +1,7 @@
 pandas
 requests
+torch
+numpy
+PIL
+matplotlib
+cuda-python
