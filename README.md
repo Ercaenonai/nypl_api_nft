@@ -11,4 +11,4 @@ register for token here: http://api.repo.nypl.org/
 
 allows for a collection uuid as input, hits the nypl API and returns designated image sizes as jpegs.
 
-see notebook for detailed comments.
+updated with functions class and main script nypl_api_download.py which takes limited args to download full collection.
