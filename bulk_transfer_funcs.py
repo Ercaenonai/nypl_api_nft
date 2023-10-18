@@ -25,6 +25,7 @@ class BulkStyleTransfer:
     vgg.to(device)
 
     mean = (0.485, 0.456, 0.406)
+
     std = (0.229, 0.224, 0.225)
 
     layers_of_interest = {'0': 'conv1_1',
@@ -62,24 +63,25 @@ class BulkStyleTransfer:
         return style_img
 
     def transformation(self, img):
-
         tasks = tf.Compose([tf.Resize(500),
                             tf.ToTensor(),
                             tf.Normalize(self.mean, self.std)])
 
         img = tasks(img)
+
         img = img.unsqueeze(0)
 
         return img
 
     def tensor_to_image(self, tensor):
-
         image = tensor.clone().detach()
+
         image = image.cpu().numpy().squeeze()
 
         image = image.transpose(1, 2, 0)
 
         image *= np.array(self.std) + np.array(self.mean)
+
         image = image.clip(0, 1)
 
         return image
@@ -98,7 +100,6 @@ class BulkStyleTransfer:
         return features
 
     def calculate_gram_matrix(self, tensor):
-
         _, channels, height, width = tensor.size()
 
         tensor = tensor.view(channels, height * width)
@@ -131,7 +132,6 @@ class BulkStyleTransfer:
         count = 0
 
         for image in img_lst:
-
             content_img = Image.open(image).convert('RGB')
 
             enhancer = ImageEnhance.Brightness(content_img)
@@ -159,9 +159,11 @@ class BulkStyleTransfer:
                     target_feature = target_features[layer]
 
                     target_gram_matrix = self.calculate_gram_matrix(target_feature)
+
                     style_gram_matrix = style_features_gram_matrix[layer]
 
                     layer_loss = F.mse_loss(target_gram_matrix, style_gram_matrix)
+
                     layer_loss *= self.weights[layer]
 
                     _, channels, height, width = target_feature.shape
