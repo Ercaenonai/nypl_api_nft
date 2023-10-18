@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="AWS Glue" read-only="true" uuid="fa70b909-425d-4ef4-9872-f335097dc102">
+      <synchronize>true</synchronize>
+      <remarks>Wrapper For AWS Glue from Big Data Tools plugin</remarks>
+      <jdbc-driver>com.dbschema.ZeppelinSparkJdbcDriver</jdbc-driver>
+      <jdbc-url>AWS Glue@glueConnections@6784053076208459908</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="connectionId" value="AWS Glue@glueConnections@6784053076208459908" />
+      </jdbc-additional-properties>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="Zeppelin ian-test" read-only="true" uuid="497b94d6-c1d9-4c54-a640-3d30fc3d4659">
+      <driver-ref>c4c29163-9953-4ed1-8d1d-d03117923bae</driver-ref>
+      <synchronize>true</synchronize>
+      <remarks>Wrapper For Zeppelin Spark from Big Data Tools plugin</remarks>
+      <jdbc-driver>com.dbschema.ZeppelinSparkJdbcDriver</jdbc-driver>
+      <jdbc-url>Zeppelin connection@ZeppelinConnections@-5384657926619390481</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="connectionId" value="Zeppelin connection@ZeppelinConnections@-5384657926619390481" />
+      </jdbc-additional-properties>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="HiveMetastore ian-test" read-only="true" uuid="3b42fb62-5836-4bce-b48a-2b711d480f32">
+      <driver-ref>d8365f29-0bfb-432e-99d4-19e5d7caab44</driver-ref>
+      <synchronize>true</synchronize>
+      <remarks>Wrapper For Hive Metastore from Big Data Tools plugin</remarks>
+      <jdbc-driver>com.dbschema.ZeppelinSparkJdbcDriver</jdbc-driver>
+      <jdbc-url>Hive Metastore@HiveMetastoreConnections@-1603766820174859917</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="connectionId" value="Hive Metastore@HiveMetastoreConnections@-1603766820174859917" />
+      </jdbc-additional-properties>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>

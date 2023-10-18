@@ -3,10 +3,10 @@ from nypl_funcs import NyplFuncs as Nf
 
 def main():
     # collection uuid
-    UUID = '7446a6c0-c5f0-012f-41c0-58d385a7bc34'
+    uuid = '7446a6c0-c5f0-012f-41c0-58d385a7bc34'
 
     # collection label for output folder name
-    COLLECTION_LABEL = 'flowers_funcs'
+    collection_label = 'flowers_funcs'
 
     # image size args to pass into image_size. for my project I am only grabbing the 760 (x) size.
     # will need further logic to handle missing sizes
@@ -21,20 +21,20 @@ def main():
 
     # NOTE: all but the high-res files will be jpeg, if you plan to resize pull images in a larger format than
     # what you will need
-    IMAGE_SIZE = 'w'
+    image_size = 'w'
 
-    IMAGE_SIZE = IMAGE_SIZE.lower()
+    image_size = image_size.lower()
 
     # choice to filter items labeled as text includes title pages, table of contents, etc.
     # depends on labeling from digital collections
     # option 'y' to filter text, 'n' for no.
-    FILTER_TEXT_ITEMS = 'y'
+    filter_text_items = 'y'
 
-    FILTER_TEXT_ITEMS = FILTER_TEXT_ITEMS.lower()
+    filter_text_items = filter_text_items.lower()
 
-    Nf(collection_label=COLLECTION_LABEL).create_path()
+    Nf(collection_label=collection_label).create_path()
 
-    results = Nf(uuid=UUID).collection_chk()
+    results = Nf(uuid=uuid).collection_chk()
 
     sub_collection_count = results[0]
 
@@ -42,10 +42,10 @@ def main():
 
     df_chk = results[2]
 
-    Nf(collection_label=COLLECTION_LABEL,
-       uuid=UUID,
-       image_size=IMAGE_SIZE,
-       filter_text_items=FILTER_TEXT_ITEMS,
+    Nf(collection_label=collection_label,
+       uuid=uuid,
+       image_size=image_size,
+       filter_text_items=filter_text_items,
        df=df_chk,
        sub_collection_count=sub_collection_count,
        item_count=item_count).image_download()

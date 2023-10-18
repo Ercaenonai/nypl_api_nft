@@ -6,16 +6,24 @@ from nypl_token import Token
 
 class NyplFuncs:
     # set API token and builds requests header auth
-    TOKEN = Token.nypl_tok
+    token = Token.nypl_tok
 
-    HEADER_AUTH = f'Token token={TOKEN}'
+    header_auth = f'Token token={token}'
 
     # sets root path for directory creation and collection save
-    ROOT_PATH = os.path.dirname(os.path.abspath("__file__"))
+    root_path = os.path.dirname(os.path.abspath("__file__"))
 
     # defines all class input args
-    def __init__(self, df=None, root_path=ROOT_PATH, collection_label=None, uuid=None, header_auth=HEADER_AUTH,
-                 sub_collection_count=None, filter_text_items=None, image_size=None, item_count=None):
+    def __init__(self, 
+                 df, 
+                 root_path=root_path, 
+                 collection_label=None, 
+                 uuid=None, 
+                 header_auth=header_auth,
+                 sub_collection_count=None, 
+                 filter_text_items=None, 
+                 image_size=None, 
+                 item_count=None):
         self.df = df
         self.root_path = root_path
         self.collection_label = collection_label
@@ -62,7 +70,6 @@ class NyplFuncs:
 
         # first condition handles collections broken into sub-collections
         if self.sub_collection_count > 0:
-
             df_sub = self.df.explode('nyplAPI.response.collection', ignore_index=True)
 
             df_sub = pd.json_normalize(df_sub['nyplAPI.response.collection'])
@@ -91,7 +98,6 @@ class NyplFuncs:
                 pass
 
             if 'imageLinks.imageLink' in df_item:
-
                 df_item_filt = df_item[['uuid', 'imageLinks.imageLink']].copy()
 
                 df_item_filt = df_item_filt.explode('imageLinks.imageLink', ignore_index=True)
@@ -103,7 +109,6 @@ class NyplFuncs:
                 img_list = df_item_filt['imageLinks.imageLink'].tolist()
 
                 for img in img_list:
-
                     response3 = requests.get(img, headers={'Authorization': self.header_auth})
 
                     count += 1
@@ -121,16 +126,13 @@ class NyplFuncs:
 
         # handles collections not broken into sub-collections
         else:
-
             # handles pagination for collections with more than 500 items
             if self.item_count > 500:
-
                 page_count = 1
 
                 item_find_only = []
 
                 while True:
-
                     page = str(page_count)
 
                     response = requests.get(
@@ -155,7 +157,6 @@ class NyplFuncs:
                         item_find_only.append(item_find)
 
                     else:
-
                         break
 
                 item_find_only = [j for i in item_find_only for j in i]
@@ -182,7 +183,6 @@ class NyplFuncs:
                     pass
 
                 if 'imageLinks.imageLink' in df_item_2.columns:
-
                     df_item_filt_2 = df_item_2[['uuid', 'imageLinks.imageLink']].copy()
 
                     df_item_filt_2 = df_item_filt_2.explode('imageLinks.imageLink', ignore_index=True)
@@ -193,7 +193,6 @@ class NyplFuncs:
                     img_list_item = df_item_filt_2['imageLinks.imageLink'].tolist()
 
                     for img in img_list_item:
-
                         response3 = requests.get(img, headers={'Authorization': self.header_auth})
 
                         count_2 += 1
@@ -206,11 +205,9 @@ class NyplFuncs:
                                 f.write(response3.content)
 
                 else:
-
                     print('no image links for collection')
 
             else:
-
                 df_item_only = self.df.explode('nyplAPI.response.item', ignore_index=True)
 
                 item_list_only = df_item_only["nyplAPI.response.item"].tolist()
@@ -241,7 +238,6 @@ class NyplFuncs:
                     pass
 
                 if 'imageLinks.imageLink' in df_item_2.columns:
-
                     df_item_filt_2 = df_item_2[['uuid', 'imageLinks.imageLink']].copy()
 
                     df_item_filt_2 = df_item_filt_2.explode('imageLinks.imageLink', ignore_index=True)
@@ -252,12 +248,11 @@ class NyplFuncs:
                     img_list_item = df_item_filt_2['imageLinks.imageLink'].tolist()
 
                     for img in img_list_item:
-
                         response3 = requests.get(img, headers={'Authorization': self.header_auth})
 
                         count_2 += 1
 
-                        # set image file type to match image_sie type
+                        # set image file type to match image_size type
                         if response3.status_code == 200:
                             with open(
                                     os.path.join(self.root_path, self.collection_label) + f"\image_{str(count_2)}.jpg",
@@ -265,5 +260,4 @@ class NyplFuncs:
                                 f.write(response3.content)
 
                 else:
-
                     print('no image links for collection')
