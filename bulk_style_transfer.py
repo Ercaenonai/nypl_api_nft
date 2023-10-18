@@ -4,7 +4,7 @@ from bulk_transfer_funcs import BulkStyleTransfer as Bst
 def main():
     image_folder = 'test_images/content_images'
 
-    style_folder = 'test_images/style_images/'
+    style_folder = 'test_images/style_images'
 
     style_image = 'detailed_elephant.png'
 
